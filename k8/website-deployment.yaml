@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+  labels:
+    app: ecom-web
+  name: ecom-web
+  namespace: webapp
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: ecom-web
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ecom-web
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: database_url
+              name: web-configmap
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: db_user
+              name: mariadb-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: db_password
+              name: mariadb-secret
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: db_name
+              name: mariadb-secret
+        image: abbasahmedkhan.azurecr.io/ecom-web:v2
+        imagePullPolicy: Always
+        name: ecom-web
+        ports:
+        - containerPort: 80
