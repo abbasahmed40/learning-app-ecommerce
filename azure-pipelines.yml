@@ -1,0 +1,52 @@
+trigger: 
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  acr_name: abbasahmedkhan
+  tag: v1-$(Build.BuildId)
+
+steps:
+- task: AzureCLI@2
+  displayName: Docker Build and Push to ACR
+  inputs:
+    azureSubscription: 'Azure-SPN-connection' 
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+            docker build -t $(acr_name).azurecr.io/ecom-web:v1-$(tag) 
+            az acr login -n $(abbasahmed40)
+            docker push $(acr_name).azurecr.io/ecom-web:v1-$(tag)
+- task: replacetokens@6
+  inputs:
+    root: 'k8'
+    sources: 'website-deployment.yaml'
+    tokenPattern: 'doubleunderscores'
+    addBOM: false
+    missingVarAction: 'none'
+    enableTransforms: false
+    actionOnMissing: 'warn'
+    additionalVariables: 
+ 
+# checking token replace or not 
+- script: cat k8/website-deployment.yaml
+
+
+- task: Kubernetes@1
+  displayName: Deploy to AKS 
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscriptionEndpoint: 'Azure-SPN-connection'
+    azureResourceGroup: 'demo'
+    kubernetesCluster: 'aks-demo'
+    namespace: 'webapp'
+    command: 'apply'
+    useConfigurationFile: true
+    configuration: 'k8/website-deployment.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+    azureSubscriptionEndpointForSecrets: 'Azure-SPN-connection'
+    azureContainerRegistry: 'abbasahmedkhan.azurecr.io'
+
