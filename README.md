@@ -1,4 +1,4 @@
-##Kubernetes Resume Challenge - E-commerce Application Deployment
+## Kubernetes Resume Challenge - E-commerce Application Deployment
 
 ## Introduction
 This repository documents my completion of the Kubernetes Resume Challenge, focusing on deploying an e-commerce application using Kubernetes and containerization techniques.
