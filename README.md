@@ -30,9 +30,3 @@ Execute this command to build and push the image
 docker build -t <acr-name>/ecom-web:v1 .
 
 docker push <acr-name>/ecom-web:v1
-
-
-
-
-
-
