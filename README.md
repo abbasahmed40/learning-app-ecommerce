@@ -1,23 +1,35 @@
-## Kubernetes Resume Challenge - E-commerce Application Deployment
+# Kubernetes Resume Challenge - E-commerce Application Deployment
 
 ## Introduction
-This repository documents my completion of the Kubernetes Resume Challenge, focusing on deploying an e-commerce application using Kubernetes and containerization techniques.
+This repository documents my completion of the Kubernetes Resume Challenge, focusing on deploying an e-commerce application using Kubernetes and containerization techniques. I used AKS to host my app and Azure container registry to store my image.
 
+## Implementation
 
-- **Step: Containerize Your E-Commerce Website and Database**
-  - A. Web Application Containerization
-    - Created Dockerfile.
-    - Built and pushed Docker image to Azure Container Registry.
-  - B. Database Containerization
-    - Prepared database initialization script.
-- **Step: Set Up Kubernetes on a Public Cloud Provider**
-  - Created Kubernetes cluster on Azure (AKS).
+### Web application and database containerization
 
+Create a Dockerfile with the content below and place it in the same directory where the application source code is located in:
 
-## Step: Deploy Your Website to Kubernetes
+```
+# php:7.4-apache as the base image
+FROM php:7.4-apache
 
-- Created Kubernetes deployment yaml file (`website-deployment.yaml`) specifying necessary environment variables and mounts for the database connection.
-- Applied the deployment to the Kubernetes cluster.
+# Install mysqli extension for PHP
+RUN docker-php-ext-install mysqli
+
+# Copy the application source code to /var/www/html/
+COPY . /var/www/html/
+
+ENV DB_HOST=mysql-service
+
+# Expose port 80 to allow traffic to the web server
+EXPOSE 80
+CMD ["apache2-foreground"]
+```
+
+```
+docker build -t abbasahmed40/ecom-web:v1 .
+
+docker push abbasahmed40/ecom-web:v1
 
 
 
