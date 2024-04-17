@@ -16,6 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecom-db-deployment
+  namespace: webapp
   labels:
     app: ecom-db
 spec:
