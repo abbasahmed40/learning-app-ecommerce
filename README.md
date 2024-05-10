@@ -68,4 +68,20 @@ now deploy database deployment manifest file
 ```
 kubectl apply -f db-deployment.yaml
 ```
+
+To deploy website first deploy secret, configmap
+
+```
+kubectl apply -f web-configmap.yaml
+
+kubectl apply -f web-secret.yaml
  
+```
+
+finally to deploy website and expose it using kubernetes service
+
+'''
+
+kubectl apply -f website-deployment.yaml
+
+''' 

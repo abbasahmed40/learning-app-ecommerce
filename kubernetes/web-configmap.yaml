@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecom-web-config
+  namespace: webapp
+data:
+  db_host: "ecom-db-service"
+  db_user: "ecomuser"
+  db_name: "ecomdb"
+  
