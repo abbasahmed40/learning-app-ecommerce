@@ -80,8 +80,8 @@ kubectl apply -f web-secret.yaml
 
 finally to deploy website and expose it using kubernetes service
 
-'''
+```
 
 kubectl apply -f website-deployment.yaml
 
-''' 
+``` 
