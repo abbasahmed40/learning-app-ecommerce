@@ -29,6 +29,8 @@ spec:
       labels:
         app: ecom-db
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: aks-agentpool-26827573-vmss000000
       containers:
       - name: ecomdb
         image: mariadb:latest

@@ -39,4 +39,33 @@ az aks get-credentials --resource-group App_Deployment  --name App_Cluster
 
 ```
 
+First  create namespace
 
+```
+kubectl create ns webapp
+```
+
+than db initlization script , 
+
+
+```
+kubectl apply -f db-configmap.yaml
+
+```
+
+now deploy secrets, pvc manifest file 
+
+```
+kubectl apply -f db-secret.yaml
+
+kubectl apply -f db-pvc.yaml
+
+```
+
+
+now deploy database deployment manifest file
+
+```
+kubectl apply -f db-deployment.yaml
+```
+ 
