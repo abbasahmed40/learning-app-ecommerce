@@ -58,11 +58,6 @@ spec:
             mountPath: /docker-entrypoint-initdb.d
           - name: ecom-db-data-vol
             mountPath: /var/lib/mysql
-        resources:
-          limits:
-            cpu: "150m"
-          requests:
-            cpu: "50m"
       volumes:
       - name: ecom-db-config-vol
         configMap:
