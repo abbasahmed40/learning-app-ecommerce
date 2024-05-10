@@ -27,6 +27,16 @@ CMD ["apache2-foreground"]
 ```
 Execute this command to build and push the image
 ```
-docker build -t <acr-name>/ecom-web:v1 .
+docker build -t abbasahmed40/ecom-web:v1 .
 
-docker push <acr-name>/ecom-web:v1
+docker push abbasahmed40/ecom-web:v1
+
+```
+### Deploy to AKS cluster
+
+```
+az aks get-credentials --resource-group App_Deployment  --name App_Cluster
+
+```
+
+
