@@ -78,7 +78,7 @@ kubectl apply -f web-secret.yaml
  
 ```
 
-finally to deploy website and expose it using kubernetes service
+finally  deploying website and expose it using kubernetes service
 
 ```
 
