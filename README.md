@@ -84,4 +84,12 @@ finally  deploying website and expose it using kubernetes service
 
 kubectl apply -f website-deployment.yaml
 
+```
+
+to mannually scale the app
+
+
+```
+kubectl scale deployment/ecom-web-deployment --replicas 6 -n webapp
+
 ``` 
