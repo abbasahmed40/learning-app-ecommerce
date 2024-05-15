@@ -92,4 +92,23 @@ to mannually scale the app
 ```
 kubectl scale deployment/ecom-web-deployment --replicas 6 -n webapp
 
-``` 
+```
+
+For Autoscalling App, adding resource limts and request
+
+```
+resources:
+  limits:
+    cpu: "150m"
+  requests:
+    cpu: "50m"
+```
+now implementing hpa
+
+```
+kubectl autoscale deployment ecom-web-deployment --cpu-percent=50 --min=2 --max=10 -n webapp
+
+```
+
+
+```  
