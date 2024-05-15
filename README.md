@@ -109,6 +109,35 @@ now implementing hpa
 kubectl autoscale deployment ecom-web-deployment --cpu-percent=50 --min=2 --max=10 -n webapp
 
 ```
+to get some load on app, install apache benchmark, and run
 
+```
+  
+ab -r -n 100000 -c 500 http://$IP/
 
-```  
+```
+
+we can get status of our hpa
+
+```
+kubectl get hpa -n webapp
+
+```
+
+now for liveness and rediness, i get help from blog please check out the detailed [blog here](https://biplab24.hashnode.dev/deploying-a-simple-e-commerce-website-on-aks)
+\n adding new endpoint ready.php and healthcheck.php to my repo.After adding rebuild and push docker image and add the code to webiste-deployment.yaml manifest file 
+
+```
+livenessProbe:
+  httpGet:
+    path: /healthcheck.php
+    port: 80
+  initialDelaySeconds: 3
+  periodSeconds: 3
+readinessProbe:
+  httpGet:
+    path: /ready.php
+    port: 80
+
+```
+
