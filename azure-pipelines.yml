@@ -37,4 +37,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+          
+    - publish: manifests
+      artifact: manifests
     
