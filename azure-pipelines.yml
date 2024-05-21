@@ -37,7 +37,11 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-          
-    - publish: manifests
-      artifact: manifests
+      
+    - task: PublishBuildArtifacts@1
+      displayName: Artifacts....
+      inputs:
+       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+       ArtifactName: 'manifest'
+       publishLocation: 'Container'
     
