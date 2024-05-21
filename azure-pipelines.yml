@@ -37,6 +37,10 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - publish: manifests
-      artifact: manifests
+    # Task 2 publish build artifacts
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/kubernetes'
+        ArtifactName: 'kube-manifests'
+        publishLocation: 'Container'
     
