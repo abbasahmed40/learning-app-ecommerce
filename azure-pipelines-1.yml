@@ -33,6 +33,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+          latest
     - script: |
         echo "Listing files in kubernetes directory:"
         ls -la $(Build.SourcesDirectory)/kubernetes
