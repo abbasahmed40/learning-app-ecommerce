@@ -13,8 +13,8 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-  vmImageName: 'test'
+  # Agent 
+  name: 'App Pool'
 
 stages:
 - stage: Build
@@ -23,7 +23,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      name: $(vmImageName)
+      name: $(name)
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -46,7 +46,7 @@ stages:
   - job: Deploy
     displayName: Deploy
     pool:
-      name: $(vmImageName)
+      name: $(name)
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
