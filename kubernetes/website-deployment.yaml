@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: ecom-web
-        image: abbasahmed40.azurecr.io/ecom-web:v2 
+        image: abbasahmed40.azurecr.io/ecom-web:latest 
         ports:
         - containerPort: 80
         env:
