@@ -34,11 +34,8 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'manifest'
-        targetPath: '$(Pipeline.Workspace)/kubernetes'
+    - upload: kubernetes
+      artifact: kubernetes
 - stage: Deploy
   displayName: Deploy to AKS
   dependsOn: Build
@@ -48,17 +45,12 @@ stages:
     pool:
       name: $(name)
     steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'manifest'
-        targetPath: '$(Pipeline.Workspace)/manifest'
     - task: KubernetesManifest@1
       inputs:
         action: 'deploy'
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'connectaks'
         namespace: 'webapp'
-        manifests: '$(Pipeline.Workspace)/manifest/website-deployment.yaml' 
+        manifests: '$(Pipeline.Workspace)/kubernetes/website-deployment.yaml' 
       
   
