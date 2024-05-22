@@ -37,7 +37,7 @@ stages:
     - script: |
         echo "Listing files in kubernetes directory:"
         ls -la $(Build.SourcesDirectory)/kubernetes
-      displayName: 'Verify Kubernetes directory'
+      displayName: 'Verifying Kubernetes directory'
     - publish: $(Build.SourcesDirectory)/kubernetes
       artifact: kubernetes
 
@@ -52,10 +52,7 @@ stages:
     steps:
     - download: current
       artifact: kubernetes
-    - script: |
-        echo "Listing files in downloaded kubernetes directory:"
-        ls -la $(Pipeline.Workspace)/kubernetes
-      displayName: 'Verify downloaded Kubernetes directory'
+    
     - task: KubernetesManifest@1
       inputs:
         action: 'deploy'
