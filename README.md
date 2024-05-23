@@ -140,4 +140,9 @@ readinessProbe:
     port: 80
 
 ```
+### Implementing CI/CD Pipeline using AKS
+
+First of all i configured service connection for aks and acr, update the website-deployment file so that the image with the latest tag can be deployed on. The file is avalible in the repo using azure-pipeline-1.yaml
+
+Pipeline consits of two stages one for build and one for deploymennt on AKS cluster, also i configured the self hosted Agents. Make sure dockers and kubectl installs on agent machine.
 
