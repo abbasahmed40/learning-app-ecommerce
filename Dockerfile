@@ -8,7 +8,7 @@ RUN docker-php-ext-install mysqli
 COPY . /var/www/html/
 
 
-ENV DB_HOST=mysql-service
+# ENV DB_HOST=mysql-service
 
 # Expose port 80 to allow traffic to the web server
 EXPOSE 80
