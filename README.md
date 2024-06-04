@@ -19,17 +19,15 @@ RUN docker-php-ext-install mysqli
 # Copy the application source code to /var/www/html/
 COPY . /var/www/html/
 
-ENV DB_HOST=mysql-service
-
 # Expose port 80 to allow traffic to the web server
 EXPOSE 80
-CMD ["apache2-foreground"]
+
 ```
 Execute this command to build and push the image
 ```
-docker build -t abbasahmed40/ecom-web:v1 .
+docker build -t abbasahmed40.azurecr.io/ecom-web:v1 .
 
-docker push abbasahmed40/ecom-web:v1
+docker push abbasahmed40.azurecr.io/ecom-web:v1
 
 ```
 ### Deploy to AKS cluster
