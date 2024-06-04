@@ -67,12 +67,6 @@ spec:
             port: 80
           initialDelaySeconds: 3
           periodSeconds: 3
-        startupProbe:
-          httpGet:
-            path: /ready.php
-            port: 80
-          failureThreshold: 30
-          periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /ready.php
